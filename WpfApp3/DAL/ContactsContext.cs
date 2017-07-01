@@ -5,6 +5,6 @@ namespace WpfApp3.DAL
 {
     public class ContactsContext : DbContext
     {
-        private DbSet<Contact> Contacts { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
     }
 }
