@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         xmlns:views="clr-namespace:WpfApp3.Views"
+        xmlns:viewModels="clr-namespace:WpfApp3.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Width="Auto" Height="Auto" MinHeight="340" MinWidth="300" MaxWidth="500" SizeToContent="WidthAndHeight">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:ContactsViewModel}">
+            <views:ContactsView/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <views:ContactsView></views:ContactsView>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

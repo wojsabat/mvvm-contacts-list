@@ -67,6 +67,7 @@
     <Compile Include="Services\ContactsRepository.cs" />
     <Compile Include="Services\IContactsRepository.cs" />
     <Compile Include="ViewModels\ContactsViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\ContactsView.xaml.cs">
       <DependentUpon>ContactsView.xaml</DependentUpon>
     </Compile>
