@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp3"
         xmlns:views="clr-namespace:WpfApp3.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Width="Auto" Height="Auto" MinHeight="340" MinWidth="300" MaxWidth="500" SizeToContent="WidthAndHeight">
     <Grid>
         <views:ContactsView></views:ContactsView>
     </Grid>
