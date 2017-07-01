@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using WpfApp3.Commands;
@@ -13,6 +14,7 @@ namespace WpfApp3.ViewModels
         private ObservableCollection<Contact> _contactsCollection;
         private Contact _selectedContact;
         private RelayCommand _deleteCommand;
+        private RelayCommand _updateCommand;
 
         public ContactsViewModel()
         {
@@ -41,12 +43,21 @@ namespace WpfApp3.ViewModels
         }
 
         public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(DeleteExecute));
+        public RelayCommand OpenUpdateViewCommand => _updateCommand ?? (_updateCommand = new RelayCommand(UpdateExecute));
 
         private async void DeleteExecute()
         {
             await _contactsRepository.DeleteAsync(_selectedContact.Id);
             UpdateContactsCollection();
         }
+
+        public event Action<Contact> UpdateContactRequested = delegate { };
+        private void UpdateExecute()
+        {
+            UpdateContactRequested(SelectedContact);
+        }
+
+
 
         private void UpdateContactsCollection()
         {

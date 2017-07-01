@@ -30,7 +30,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-            <Button Content="Update" Margin="10" Padding="5" Width="60" HorizontalAlignment="Left"/>
+            <Button Content="Update" Command="{Binding OpenUpdateViewCommand}" Margin="10" Padding="5" Width="60" HorizontalAlignment="Left"/>
             <Button Content="Add" Margin="10"  Padding="5"  Width="60" HorizontalAlignment="Right"/>
         </StackPanel>
     </Grid>
