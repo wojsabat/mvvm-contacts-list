@@ -40,6 +40,8 @@ namespace WpfApp3.ViewModels
             }
         }
 
+        public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(DeleteExecute));
+
         private async void DeleteExecute()
         {
             await _contactsRepository.DeleteAsync(_selectedContact.Id);
@@ -50,13 +52,6 @@ namespace WpfApp3.ViewModels
         {
             ContactsCollection = new ObservableCollection<Contact>(_contactsRepository.GetAllAsync().Result);
         }
-
-        private bool CanDelete()
-        {
-            return SelectedContact != null;
-        }
-
-        public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(DeleteExecute, CanDelete));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
