@@ -35,4 +35,3 @@ namespace WpfApp3.ViewModels
         }
     }
 }
-}
