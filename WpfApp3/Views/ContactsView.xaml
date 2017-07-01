@@ -7,10 +7,7 @@
              xmlns:viewModels="clr-namespace:WpfApp3.ViewModels"
              mc:Ignorable="d" 
              Width="Auto" Height="Auto" Padding="10" MinHeight="300">
-    <UserControl.DataContext>
-        <viewModels:ContactsViewModel />
-    </UserControl.DataContext>
-    <Grid>
+    <Grid>    
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"  />

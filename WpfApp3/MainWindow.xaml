@@ -15,6 +15,9 @@
         <DataTemplate DataType="{x:Type viewModels:ContactsViewModel}">
             <views:ContactsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:UpdateViewModel}">
+            <views:UpdateView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}"/>
