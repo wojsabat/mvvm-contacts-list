@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindableBase.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="DAL\ContactsContext.cs" />
     <Compile Include="Model\Contact.cs" />

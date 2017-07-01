@@ -7,7 +7,7 @@ using WpfApp3.Services;
 
 namespace WpfApp3.ViewModels
 {
-    public class ContactsViewModel : INotifyPropertyChanged
+    public class ContactsViewModel : BindableBase
     {
         private readonly IContactsRepository _contactsRepository;
         private ObservableCollection<Contact> _contactsCollection;
@@ -51,13 +51,6 @@ namespace WpfApp3.ViewModels
         private void UpdateContactsCollection()
         {
             ContactsCollection = new ObservableCollection<Contact>(_contactsRepository.GetAllAsync().Result);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
