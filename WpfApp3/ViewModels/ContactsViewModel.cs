@@ -38,12 +38,12 @@ namespace WpfApp3.ViewModels
             set
             {
                 _selectedContact = value;
-                DeleteCommand.RaiseCanExecuteChanged();
+                OpenUpdateViewCommand.RaiseCanExecuteChanged();
             }
         }
 
         public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(DeleteExecute));
-        public RelayCommand OpenUpdateViewCommand => _updateCommand ?? (_updateCommand = new RelayCommand(UpdateExecute));
+        public RelayCommand OpenUpdateViewCommand => _updateCommand ?? (_updateCommand = new RelayCommand(UpdateExecute, CanUpdate));
 
         private async void DeleteExecute()
         {
@@ -55,6 +55,11 @@ namespace WpfApp3.ViewModels
         private void UpdateExecute()
         {
             UpdateContactRequested(SelectedContact);
+        }
+
+        private bool CanUpdate()
+        {
+            return SelectedContact != null;
         }
 
 
