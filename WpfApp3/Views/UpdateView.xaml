@@ -8,13 +8,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"  />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="20" >
             <Label Content="Name: "/>
             <TextBox Text="{Binding Contact.Name}"/>
             <Label Content="Surname: "/>
             <TextBox Text="{Binding Contact.Surname}"/>
             <Label Content="Phone: "/>
             <TextBox Text="{Binding Contact.Phone}"/>
-        </StackPanel>        
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Content="Update" Command="{Binding UpdateCommand}" Margin="10" Padding="5" Width="60"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" Margin="10"  Padding="5"  Width="60"/>
+        </StackPanel>
     </Grid>
 </UserControl>
