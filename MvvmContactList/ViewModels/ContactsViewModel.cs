@@ -14,11 +14,14 @@ namespace MvvmContactList.ViewModels
         private RelayCommand _updateCommand;
         private RelayCommand _addCommand;
 
-        public ContactsViewModel()
+        public ContactsViewModel(IContactsRepository contactsRepository)
         {
-            _contactsRepository = new ContactsRepository();
+            _contactsRepository = contactsRepository;
             _contactsCollection = new ObservableCollection<Contact>(_contactsRepository.GetAllAsync().Result);
         }
+
+        public event Action<Contact> UpdateContactRequested = delegate { };
+        public event Action AddContactRequested = delegate { };
 
         public ObservableCollection<Contact> ContactsCollection
         {
@@ -44,6 +47,7 @@ namespace MvvmContactList.ViewModels
         public RelayCommand OpenUpdateViewCommand => _updateCommand ?? (_updateCommand = new RelayCommand(UpdateExecute, CanUpdate));
         public RelayCommand OpenAddViewCommand => _addCommand ?? (_addCommand = new RelayCommand(AddExecute));
 
+
         public void Refresh()
         {
             UpdateContactsCollection();
@@ -55,9 +59,6 @@ namespace MvvmContactList.ViewModels
             await _contactsRepository.DeleteAsync(_selectedContact.Id);
             UpdateContactsCollection();
         }
-
-        public event Action<Contact> UpdateContactRequested = delegate { };
-        public event Action AddContactRequested = delegate { };
 
         private void UpdateExecute()
         {

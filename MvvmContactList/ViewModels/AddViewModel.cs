@@ -11,12 +11,12 @@ namespace MvvmContactList.ViewModels
         private RelayCommand _cancelCommand;
         private IContactsRepository _contactsRepository;
 
-        public event Action GoToListRequested = delegate { };
-
-        public AddViewModel()
+        public AddViewModel(IContactsRepository contactsRepository)
         {
-            _contactsRepository = new ContactsRepository();
+            _contactsRepository = contactsRepository;
         }
+
+        public event Action GoToListRequested = delegate { };
 
         public Contact Contact
         {
@@ -38,7 +38,7 @@ namespace MvvmContactList.ViewModels
             GoToListRequested();
         }
 
-        public void CancelExecute()
+        private void CancelExecute()
         {
             GoToListRequested();
         }

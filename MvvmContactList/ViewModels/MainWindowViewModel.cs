@@ -1,17 +1,39 @@
-﻿using MvvmContactList.Model;
+﻿using Autofac;
+using Autofac.Core;
+using MvvmContactList.Model;
+using MvvmContactList.Services;
 
 namespace MvvmContactList.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private ContactsViewModel _contactsViewModel = new ContactsViewModel();
-        private UpdateViewModel _updateViewModel = new UpdateViewModel();
-        private AddViewModel _addViewModel = new AddViewModel();
+        private ContactsViewModel _contactsViewModel;
+        private UpdateViewModel _updateViewModel;
+        private AddViewModel _addViewModel;
         private BindableBase _currentViewModel;
         
         public MainWindowViewModel()
         {
+            InitializeSubViewModels();
             _currentViewModel = _contactsViewModel;
+            SubscribeToEvents();
+        }
+
+        public BindableBase CurrentViewModel
+        {
+            get => _currentViewModel;
+            set => SetProperty(ref _currentViewModel, value);
+        }
+
+        private void InitializeSubViewModels()
+        {
+            _contactsViewModel = DiContainer.Container.Resolve<ContactsViewModel>();
+            _updateViewModel = DiContainer.Container.Resolve<UpdateViewModel>();
+            _addViewModel = DiContainer.Container.Resolve<AddViewModel>();
+        }
+
+        private void SubscribeToEvents()
+        {
             _contactsViewModel.UpdateContactRequested += OpenUpdateView;
             _contactsViewModel.AddContactRequested += OpenAddView;
             _updateViewModel.GoToListRequested += OpenContactsView;
@@ -34,12 +56,6 @@ namespace MvvmContactList.ViewModels
         {
             _addViewModel.Contact = new Contact();
             CurrentViewModel = _addViewModel;
-        }
-
-        public BindableBase CurrentViewModel
-        {
-            get => _currentViewModel;
-            set => SetProperty(ref _currentViewModel, value);
         }
     }
 }

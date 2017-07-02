@@ -10,12 +10,12 @@ namespace MvvmContactList.ViewModels
         private RelayCommand _updateCommand;
         private IContactsRepository _contactsRepository;
 
-        public event Action GoToListRequested = delegate { };
-
-        public UpdateViewModel()
+        public UpdateViewModel(IContactsRepository contactsRepository)
         {
-            _contactsRepository = new ContactsRepository();
+            _contactsRepository = contactsRepository;
         }
+
+        public event Action GoToListRequested = delegate { };
 
         public Contact Contact
         {
