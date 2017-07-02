@@ -45,6 +45,12 @@ namespace WpfApp3.ViewModels
         public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(DeleteExecute));
         public RelayCommand OpenUpdateViewCommand => _updateCommand ?? (_updateCommand = new RelayCommand(UpdateExecute, CanUpdate));
 
+        public void Refresh()
+        {
+            UpdateContactsCollection();
+            SelectedContact = null;
+        }
+
         private async void DeleteExecute()
         {
             await _contactsRepository.DeleteAsync(_selectedContact.Id);
@@ -52,6 +58,7 @@ namespace WpfApp3.ViewModels
         }
 
         public event Action<Contact> UpdateContactRequested = delegate { };
+
         private void UpdateExecute()
         {
             UpdateContactRequested(SelectedContact);
@@ -63,10 +70,10 @@ namespace WpfApp3.ViewModels
         }
 
 
-
         private void UpdateContactsCollection()
         {
-            ContactsCollection = new ObservableCollection<Contact>(_contactsRepository.GetAllAsync().Result);
+            var contacts = _contactsRepository.GetAllAsync().Result;
+            ContactsCollection = new ObservableCollection<Contact>(contacts);
         }
     }
 }
