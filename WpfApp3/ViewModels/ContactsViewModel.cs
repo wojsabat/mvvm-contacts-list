@@ -15,6 +15,7 @@ namespace WpfApp3.ViewModels
         private Contact _selectedContact;
         private RelayCommand _deleteCommand;
         private RelayCommand _updateCommand;
+        private RelayCommand _addCommand;
 
         public ContactsViewModel()
         {
@@ -44,6 +45,7 @@ namespace WpfApp3.ViewModels
 
         public RelayCommand DeleteCommand => _deleteCommand ?? (_deleteCommand = new RelayCommand(DeleteExecute));
         public RelayCommand OpenUpdateViewCommand => _updateCommand ?? (_updateCommand = new RelayCommand(UpdateExecute, CanUpdate));
+        public RelayCommand OpenAddViewCommand => _addCommand ?? (_addCommand = new RelayCommand(AddExecute));
 
         public void Refresh()
         {
@@ -58,6 +60,7 @@ namespace WpfApp3.ViewModels
         }
 
         public event Action<Contact> UpdateContactRequested = delegate { };
+        public event Action AddContactRequested = delegate { };
 
         private void UpdateExecute()
         {
@@ -67,6 +70,11 @@ namespace WpfApp3.ViewModels
         private bool CanUpdate()
         {
             return SelectedContact != null;
+        }
+
+        private void AddExecute()
+        {
+            AddContactRequested();
         }
 
 

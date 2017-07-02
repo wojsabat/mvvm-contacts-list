@@ -18,6 +18,9 @@
         <DataTemplate DataType="{x:Type viewModels:UpdateViewModel}">
             <views:UpdateView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:AddViewModel}">
+            <views:AddView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}"/>

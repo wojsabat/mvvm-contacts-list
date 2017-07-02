@@ -8,13 +8,16 @@ namespace WpfApp3.ViewModels
     {
         private ContactsViewModel _contactsViewModel = new ContactsViewModel();
         private UpdateViewModel _updateViewModel = new UpdateViewModel();
+        private AddViewModel _addViewModel = new AddViewModel();
         private BindableBase _currentViewModel;
         
         public MainWindowViewModel()
         {
             _currentViewModel = _contactsViewModel;
             _contactsViewModel.UpdateContactRequested += OpenUpdateView;
+            _contactsViewModel.AddContactRequested += OpenAddView;
             _updateViewModel.GoToListRequested += OpenContactsView;
+            _addViewModel.GoToListRequested += OpenContactsView;
         }
 
         private void OpenUpdateView(Contact contact)
@@ -27,6 +30,12 @@ namespace WpfApp3.ViewModels
         {
             _contactsViewModel.Refresh();
             CurrentViewModel = _contactsViewModel;
+        }
+
+        private void OpenAddView()
+        {
+            _addViewModel.Contact = new Contact();
+            CurrentViewModel = _addViewModel;
         }
 
         public BindableBase CurrentViewModel
