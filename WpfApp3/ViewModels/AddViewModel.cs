@@ -9,6 +9,7 @@ namespace WpfApp3.ViewModels
     {
         private Contact _contact;
         private RelayCommand _addCommand;
+        private RelayCommand _cancelCommand;
         private IContactsRepository _contactsRepository;
 
         public event Action GoToListRequested = delegate { };
@@ -29,13 +30,18 @@ namespace WpfApp3.ViewModels
         }
 
         public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(AddExecute, CanAdd));
+        public RelayCommand CancelCommand => _cancelCommand ?? (_cancelCommand = new RelayCommand(CancelExecute));
 
         private async void AddExecute()
         {
             Contact.Id = Guid.NewGuid();
             await _contactsRepository.AddAsync(Contact);
             GoToListRequested();
+        }
 
+        public void CancelExecute()
+        {
+            GoToListRequested();
         }
 
         private bool CanAdd()
